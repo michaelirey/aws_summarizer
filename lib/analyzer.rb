@@ -23,8 +23,8 @@ class Analyzer
       # Some items have the whole month as the duration, we can discard these
       next unless @report_helper.duration_is_one_hour?(row['UsageStartDate'], row['UsageEndDate'])
 
-      new_hour if @report_helper.new_hour?(row['UsageStartDate'])
-      new_day(row['UsageStartDate']) if @report_helper.new_day?(row['UsageStartDate'])
+      create_new_billing_hour if @report_helper.new_hour?(row['UsageStartDate'])
+      create_new_billing_day(row['UsageStartDate']) if @report_helper.new_day?(row['UsageStartDate'])
 
       # Collect all resource_ids with tags ( to create a signature )
       @tag_changes.add_resource(time: row['UsageStartDate'], resource_id: row['ResourceId'], tags: @report_helper.tag_data(row))
@@ -47,14 +47,14 @@ class Analyzer
 
   private
 
-    def new_day(date)
+    def create_new_billing_day(date)
       if !@billing_day.nil? # After the first day
         @billing_day.display_summary
       end
       @billing_day = BillingDay.new(date)
     end
 
-    def new_hour
+    def create_new_billing_hour
       if !@billing_hour.nil? # After the first hour
         @billing_day.add_hour(@billing_hour)
       end
