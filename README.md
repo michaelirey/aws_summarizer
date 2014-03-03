@@ -99,7 +99,9 @@ Note: For maximum optimization, you may need to run this a few times and fine tu
 
 There are other benefits of this assembly line strategy besides performance. All work is broken in to logic steps, because of this the application will be easier to maintain and adjust. Maintenance of the application no longer means impacting the whole process, so less chance for bug to cascade throughout the whole application (although not impossible). Also it may be possible for a new developer to work on a small piece of the puzzle without needing to know all the details of the big picture.
 
-
+License
+==============
+This application is released under The MIT License. For details see LICENSE.txt
 
 
 
