@@ -62,7 +62,7 @@ Where the time complexity will increase by a cube of 3 when each instance, tag, 
 
 Final Thoughts
 ==============
-The above application will work fine for generating a summary for a single Amazon CSV file, or even a few. But what if you had several thousand, or hundred thousand files to process? What could be done to optimize efficiency of processing so many CSV files? Well the simplest way would be to spin up a bunch of worker servers and split the work evenly between all of them. While this would work, there is a more efficient way to use available resources.
+The above application will work fine for generating a summary for a single Amazon CSV file, or even a few. But what if you had several thousand, or hundred thousand files to process? What could be done to optimize efficiency of processing so many CSV files? A simple way would be to spin up a bunch of worker servers and split the work evenly between all of them. While this would work, there is a more efficient way to use available resources.
 
 Think of an assembly line, where multiple workers wait for objects coming down the assembly line. Each worker performing a single task, preparing the item to be worked on the for the next worker down the line.
 
