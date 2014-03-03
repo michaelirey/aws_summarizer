@@ -29,7 +29,7 @@ ruby ./summarizer.rb <file_name>
 
 Design Notes
 ==============
-First thought was to load all the data into some kind of database, so the data would be easier to work with. However, this has a couple drawbacks. First, it creates a dependency in order to use this program. The other drawback is performance. The data has to be extracted from the CSV file. So reading it from the input file, writing it to a database, then reading it back again has overhead that could be avoided. Conclusion - no database is used to generate the summary.
+When first thinking about how to design this application, one of the first thoughts was to load all the data into a database, so the data would be easier to work with. However, this has a couple drawbacks. First, it creates a dependency in order to use this program. The other drawback is performance. The data has to be extracted from the CSV file. So reading it from the input file, writing it to a database, then reading it back again has overhead that could be avoided. Conclusion - no database is used to generate the summary.
 
 This application is broken into logical parts (classes):
  - BillingLineItem - Represents a single row in the CSV
@@ -42,6 +42,8 @@ This application is broken into logical parts (classes):
 
 Additional Notes
 ==============
+Tags are not hard coded into the application they are exctracted from the header. Headers, begining with 'user:' are used as tags. This makes the application more flexible when dealing with files with different tag names.
+
 Unique instances are determined by 'UsageType' which starts with 'BoxUsage'.
 
 When grouping by tags for the given day, resources without tags are not included in the summary report.
@@ -92,7 +94,7 @@ Here is an example of how this could be accomplished:
  - Add the unique instance report
 
 
-Note: For maximum optimization, you may need to run this a few times and fine tune the number of workers in each queue, identifying any bottlenecks. Workers could also dynamically created when there is work in the queue and all workers are currently busy. Likewise workers could be destroyed when there is no work in the queue for them.
+Note: For maximum optimization, you may need to run this a few times and fine tune the number of workers in each queue, identifying any bottlenecks. Workers could also dynamically be created when there is work in the queue and all workers are currently busy. Likewise workers could be destroyed when there is no work in the queue for them.
 
 
 There are other benefits of this assembly line strategy besides performance. All work is broken in to logic steps, because of this the application will be easier to maintain and adjust. Maintenance of the application no longer means impacting the whole process, so less chance for bug to cascade throughout the whole application (although not impossible). Also it may be possible for a new developer to work on a small piece of the puzzle without needing to know all the details of the big picture.
