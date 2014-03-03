@@ -8,7 +8,7 @@ Uses Amazon's detailed monthly csv billing file as input.
 Generates a summary including:
  - Counts the unique types of EC2 instances and their description
  - Total cost by day, by tag. (i.e. on March 3rd, Environment = Production cost $100.00)
- - Instances that changed tags during the month, and the timestamps when and how they changed.
+ - Instances that changed tags during the month, and the timestamps for when and how they changed.
 
 Installation
 ==============
