@@ -41,6 +41,7 @@ class Analyzer
   end
 
   def final_report
+    @billing_day.display_summary
     @tag_changes.display_changed_tags
     @report_helper.instance_type_report
   end
